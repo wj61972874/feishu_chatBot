@@ -142,7 +142,7 @@ export function requestUserAccessToken(code, complete) {
     })
 }
 
-function getOrigin(apiPort) {
+export function getOrigin(apiPort) {
     // console.log('process.env', process.env)
     let hostname = window.location.hostname
     return `http://${hostname}:${apiPort}`

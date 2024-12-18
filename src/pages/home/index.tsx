@@ -10,9 +10,14 @@ import {
   requestUserAccessToken,
 } from "../../utils/auth_access_util";
 import "./index.css";
+import { getUserInfoStorage, setUserInfoStotage } from "../../utils/storage";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
+
+  const userInfoStorage = getUserInfoStorage();
 
   const params = new URLSearchParams(window.location.search);
   const openInBrowserValue = params.get("open_in_browser") === "true";
@@ -27,7 +32,7 @@ export default function Home() {
       //免登处理
       requestUserAccessToken(code, (userInfo) => {
         console.log("杰哥测试====handleUserAuth=：", userInfo);
-        setUserInfo(userInfo);
+        redirectToChatPage(userInfo);
       });
     } else if (!openInBrowserValue) {
       //鉴权处理
@@ -36,11 +41,22 @@ export default function Home() {
         //免登处理
         handleUserAuth((userInfo) => {
           console.log("杰哥测试====handleUserAuth=：", userInfo);
-          setUserInfo(userInfo);
+          redirectToChatPage(userInfo);
         });
       });
     }
   }, [openInBrowserValue, code]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const redirectToChatPage = (userInfo: any) => {
+    setUserInfo(userInfo);
+    setUserInfoStotage(userInfo);
+  };
+
+  if (userInfoStorage) {
+    navigate("/feishuApp/chatBot");
+    return;
+  }
+
   if (openInBrowserValue) {
     console.log("open_in_browser");
     authorizeFeishu();

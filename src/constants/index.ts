@@ -1,0 +1,4 @@
+
+export enum EStorageKey {
+    FEISHU_APP_CHATBOT_USERINFO = 'FEISHU_APP_CHATBOT_USERINFO',
+}

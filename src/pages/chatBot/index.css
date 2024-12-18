@@ -1,0 +1,23 @@
+pre {
+  background-color: rgb(248 244 242);
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.code-block {
+  position: relative;
+}
+.copy-button {
+  position: absolute;
+  right: 12px;
+  top: 30px;
+  background-color: antiquewhite;
+  color: brown;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.hljs {
+  background: unset !important;
+}

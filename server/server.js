@@ -3,8 +3,12 @@ const Router = require('koa-router')
 const axios = require('axios')
 const CryptoJS = require('crypto-js')
 const session = require('koa-session');
+const bodyParser = require('koa-bodyparser');
+const cors = require('koa2-cors'); // 引入 koa-cors
 const serverConfig = require('./server_config')
 const serverUtil = require('./server_util')
+
+const routerApi=require('./api')
 
 const LJ_JSTICKET_KEY = 'lk_jsticket'
 const LJ_TOKEN_KEY = 'lk_token'
@@ -178,11 +182,19 @@ const koaSessionConfig = {
 };
 app.use(session(koaSessionConfig, app));
 
+app.use(bodyParser()); // 确保使用 koa-bodyparser 中间件
+app.use(cors()); // 使用 koa-cors 中间件
+
+// router.post('/blacklake/chatBot/getAccessToken',async (ctx)=>{
+//     ctx.body = "accessToken"
+// })
+
 
 //注册服务端路由和处理
 router.get(serverConfig.config.getUserAccessTokenPath, getUserAccessToken)
 router.get(serverConfig.config.getSignParametersPath, getSignParameters)
 var port = process.env.PORT || serverConfig.config.apiPort;
+app.use(routerApi.routes()).use(routerApi.allowedMethods());
 app.use(router.routes()).use(router.allowedMethods());
 app.listen(port, () => {
     console.log(`server is start, listening on port ${port}`);

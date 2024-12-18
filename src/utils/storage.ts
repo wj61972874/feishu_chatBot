@@ -1,10 +1,17 @@
+import { EStorageKey } from "../constants";
 import { IUserInfoStorage } from "../interfaces/storage.interface";
+import jsonParse from "./jsonParse";
 
 
-export function setUserInfo(userInfo: IUserInfoStorage) {
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+export function setUserInfoStotage(userInfo: IUserInfoStorage) {
+    localStorage.setItem(EStorageKey.FEISHU_APP_CHATBOT_USERINFO, JSON.stringify(userInfo));
 }
 
-export function getUserInfo() {
-
+export function getUserInfoStorage() {
+    const userInfo = localStorage.getItem(EStorageKey.FEISHU_APP_CHATBOT_USERINFO) ?? ''
+    if (userInfo !== 'undefined') {
+        return jsonParse<IUserInfoStorage>(userInfo);
+    } else {
+        return undefined;
+    }
 }   

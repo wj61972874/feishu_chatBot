@@ -1,7 +1,9 @@
 
 
 export default function jsonParse<T = unknown>(str?: string | undefined): T | undefined {
+    console.log('getUserInfoStorage2222:', str);
     if (!str) {
+
         return undefined;
     }
     try {
