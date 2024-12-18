@@ -1,6 +1,8 @@
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom"
 import NotFound from './pages/notfound/index.js';
-import Home from './pages/home/index.js';
+import Home from './pages/home';
+
+ <reference path="./global.d.ts" />
 
 function App() {
   return (

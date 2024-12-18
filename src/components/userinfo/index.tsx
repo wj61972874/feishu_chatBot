@@ -2,7 +2,7 @@ import "./index.css";
 import logo from "../../logo.svg";
 import React from "react";
 
-function UserInfo(props) {
+function UserInfo(props: any) {
   let userInfo = props.userInfo;
   if (!userInfo) {
     userInfo = {};
