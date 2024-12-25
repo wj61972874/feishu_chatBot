@@ -20,6 +20,7 @@ pre {
 
 .hljs {
   background: unset !important;
+  white-space: break-spaces;
 }
 
 /* 隐藏滚动条，但仍然可以滚动 */

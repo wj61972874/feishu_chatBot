@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@ant-design/x": "^1.0.3",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.2",
     "axios": "^1.2.3",
@@ -54,6 +55,7 @@
     "@types/js-cookie": "^3.0.6",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
+    "antd-style": "^3.7.1",
     "autoprefixer": "^10.4.20",
     "chalk": "4.1.2",
     "commander": "^10.0.0",

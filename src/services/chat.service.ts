@@ -1,14 +1,14 @@
 import clientConfig from "../config/client_config";
 import { getOrigin } from "../utils/auth_access_util";
 
-export default async function callModerChat(msg: string, onMessage: (msg: any) => void) {
+export default async function callModerChat(msg: string, curModel: string, onMessage: (msg: any) => void) {
     try {
         const response = await fetch(`${getOrigin(clientConfig.apiPort)}/blacklake/chatBot/callModerChat`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ msg })
+            body: JSON.stringify({ msg, curModel })
         });
 
         if (!response.body) {
@@ -51,8 +51,8 @@ export default async function callModerChat(msg: string, onMessage: (msg: any) =
                 if (line === "") { //读取到空行，一个数据块发送完成
                     const parsedData = JSON.parse(dataMsgBuffer);
                     completeMessage += parsedData.result; // 合并数据块
-                    if (parsedData.search_info.search_results) {
-                        searchResult = searchResult.concat(parsedData.search_info.search_results);
+                    if (parsedData?.search_info?.search_results) {
+                        searchResult = searchResult.concat(parsedData?.search_info?.search_results);
                     }
 
                     onMessage({

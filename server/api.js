@@ -2,6 +2,8 @@
 const axios = require('axios');
 const Router = require('koa-router');
 const {getAccessToken} =require('./baiduModer')
+const {EMODELS,
+    ModelURLMap} =require('./constant')
 
 const AK = "PbN0DATzeJ41yR6gjkeAgcBH"
 const SK = "UHcAr2yCbKIJnj492XXUZIKNMdEubSRA"
@@ -16,9 +18,9 @@ router.post('/getAccessToken',async (ctx)=>{
 
 
 router.post('/callModerChat', async (ctx) => {
-    const { msg } = ctx.request.body;
+    const { msg,curModel } = ctx.request.body;
     const accessToken = await getAccessToken();
-    const url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions";
+    const url =ModelURLMap[curModel] || "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions";
     const body = {
         "enable_trace": true,
         "stream": true,
